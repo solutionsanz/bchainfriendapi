@@ -147,8 +147,8 @@ api.add_resource(OrderList, '/orders')
 api.add_resource(OrderInDetail, '/orders/<string:order_id>')
 api.add_resource(OrderHistory, '/orders/<string:order_id>/history')
 
-api.add_resource(OrderShip, '/orderShip/<string:order_id>')
-api.add_resource(OrderReceive, '/orderReceive/<string:order_id>')
+api.add_resource(OrderShip, '/orders/<string:order_id>/ship')
+api.add_resource(OrderReceive, '/orders/<string:order_id>/receive')
 api.add_resource(OrderCreate, '/orders/<string:order_id>')
 
 
