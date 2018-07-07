@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: bchainfriendapiingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+  namespace: bchainfriendapi      
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - path: /orders
+        backend:
+          serviceName: bchainfriendapiservice
+          servicePort: http

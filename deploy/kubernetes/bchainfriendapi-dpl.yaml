@@ -1,0 +1,27 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: bchainfriendapideployment
+  labels:
+    app: bchainfriendapi
+    microservice: app
+  namespace: bchainfriendapi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bchainfriendapi
+      microservice: app
+  template:
+    metadata:
+      labels:
+        app: bchainfriendapi
+        microservice: app
+        version: v0.0.1
+    spec:
+      containers:
+      - name: bchainfriendapi
+        image: cciturria/bchainfriendapi
+        ports:
+        - containerPort: 3000
