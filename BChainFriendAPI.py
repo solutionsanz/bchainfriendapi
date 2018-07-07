@@ -14,7 +14,7 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-# bcUrl="http://123.313.13.80:6110"
+# bcUrl="http://123.201.13.80:6110"
 bcUrl=os.getenv('BC_URL')
 bcBase='{"channel":"aclprodorderer","chaincode":"faborder2","chaincodeVer":"v1",'
 
