@@ -2,3 +2,4 @@ env
 .git
 .vagrant
 bchainfriendapi-dpl.yaml
+temp_*
