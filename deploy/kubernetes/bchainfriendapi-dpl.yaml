@@ -23,5 +23,10 @@ spec:
       containers:
       - name: bchainfriendapi
         image: cciturria/bchainfriendapi
+        env:
+        - name: BC_URL
+          value: "http://129.213.73.60:6110"
+        - name: PORT
+          value: "5002"        
         ports:
-        - containerPort: 3000
+        - containerPort: 5002
