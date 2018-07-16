@@ -10,13 +10,23 @@ import os
 # Used for faborder.go
 # 03-Jul-2018
 #
+# Have the following Methods available via the REST API
+# 
+#  http://a.b.c/orders                               List All Orders
+#  http://a.b.c//orders/<string:order_id>            Gets Details about a Specific Order with <order_id>
+#  http://a.b.c/orders/<string:order_id>/history     Gets History about a Specific Order with <order_id>
+#  http://a.b.c/orders/<string:order_id>/modify      Will create Fake History for a Specific Order with <order_id>
+#
+#  http://a.b.c/orders/<string:order_id>/ship        Will put Order with <order_id> in a SHIPPED State
+#  http://a.b.c/orders/<string:order_id>/receive     Will put Order with <order_id> in a RECEIVED State
+#  http://a.b.c/orders/<string:order_id>/create      Will record the Creation of an Order, with generated order_id 
+#
 
 app = Flask(__name__)
 api = Api(app)
 
-bcUrl="http://129.213.73.60:6110"
-
-# bcUrl=os.getenv('BC_URL')
+#bcUrl="http://129.213.73.60:6110"
+bcUrl=os.getenv('BC_URL')
 bcBase='{"channel":"aclprodorderer","chaincode":"faborder2","chaincodeVer":"v1",'
 
 api_url_inv = bcUrl+"/bcsgw/rest/v1/transaction/invocation"
