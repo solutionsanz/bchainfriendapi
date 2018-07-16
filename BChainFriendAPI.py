@@ -14,8 +14,9 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-# bcUrl="http://123.201.13.80:6110"
-bcUrl=os.getenv('BC_URL')
+bcUrl="http://129.213.73.60:6110"
+
+# bcUrl=os.getenv('BC_URL')
 bcBase='{"channel":"aclprodorderer","chaincode":"faborder2","chaincodeVer":"v1",'
 
 api_url_inv = bcUrl+"/bcsgw/rest/v1/transaction/invocation"
@@ -141,11 +142,51 @@ class OrderHistory(Resource):
         print newRecordHistory2
         return newRecordHistory2
 
+class OrderModify(Resource):
+    def get(self,order_id):
+        paramsHere = '"'+order_id+'","Trucking Tony","SHIPPING"'
+        change_json= bcBase+'"method":"shipOrder","args":['+ paramsHere +']}'
+        print(change_json)
+        resp = requests.post(api_url_inv, data=change_json,
+                             headers={'Content-Type': 'application/json'}, )
+
+        paramsHere = '"'+order_id+'","Storage Sally","SHIPPING"'
+        change_json= bcBase+'"method":"shipOrder","args":['+ paramsHere +']}'
+        print(change_json)
+        resp = requests.post(api_url_inv, data=change_json,
+                             headers={'Content-Type': 'application/json'}, )
+
+        paramsHere = '"'+order_id+'","Trucking Tony","SHIPPING"'
+        change_json= bcBase+'"method":"shipOrder","args":['+ paramsHere +']}'
+        print(change_json)
+        resp = requests.post(api_url_inv, data=change_json,
+                             headers={'Content-Type': 'application/json'}, )
+
+        paramsHere = '"'+order_id+'","Flying Francesco","SHIPPING"'
+        change_json= bcBase+'"method":"shipOrder","args":['+ paramsHere +']}'
+        print(change_json)
+        resp = requests.post(api_url_inv, data=change_json,
+                             headers={'Content-Type': 'application/json'}, )
+
+
+        paramsHere = '"'+order_id+'","Toby Trucksters","SHIPPING"'
+        change_json= bcBase+'"method":"shipOrder","args":['+ paramsHere +']}'
+        print(change_json)
+        resp = requests.post(api_url_inv, data=change_json,
+                             headers={'Content-Type': 'application/json'}, )
+
+        if resp.status_code != 200:
+            raise ApiError('POST '.format(resp.status_code))
+        return resp.json()
+
+
+
 ## Actually setup the Api resource routing here
 ##
 api.add_resource(OrderList, '/orders')
 api.add_resource(OrderInDetail, '/orders/<string:order_id>')
 api.add_resource(OrderHistory, '/orders/<string:order_id>/history')
+api.add_resource(OrderModify, '/orders/<string:order_id>/modify')
 
 api.add_resource(OrderShip, '/orders/<string:order_id>/ship')
 api.add_resource(OrderReceive, '/orders/<string:order_id>/receive')
